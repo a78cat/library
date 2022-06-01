@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shrewd.mapper.UserMapper">
+    <resultMap id="userResMap" type="User">
+        <id property="uId" column="uId"/>
+        <result property="uName" column="uName"/>
+        <result property="uPwd" column="uPwd"/>
+        <result property="uRole" column="uRole"/>
+    </resultMap>
+<!--SELECT 区域-->
+    <!--通过id查找用户-->
+    <select id="findUserByUId"
+            parameterType="Integer"
+            resultType="User"
+            resultMap="userResMap">
+        SELECT * FROM library.user WHERE uId = #{uId};
+    </select>
+    <!--通过姓名查找用户-->
+    <select id="findUserByUName"
+            parameterType="String"
+            resultType="User"
+            resultMap="userResMap">
+        SELECT * FROM library.user WHERE uName = #{uName};
+    </select>
+    <!--通过身份查找用户-->
+    <select id="findUserByURole"
+            parameterType="Integer"
+            resultType="User">
+        SELECT * FROM library.user WHERE uRole = #{uRole};
+    </select>
+    <!--通过用户名和密码查找用户-->
+    <select id="findUserByUNameAndPassWord"
+            resultMap="userResMap">
+        SELECT * FROM library.user WHERE uName=#{uName} AND uPwd=#{uPwd};
+    </select>
+<!--SELECT 区域-->
+<!--INSERT 区域-->
+    <insert id="addUser"
+            parameterType="User">
+        INSERT INTO library.user(uName, uPwd, uRole) VALUES (#{uName}, #{uPwd}, #{uRole});
+    </insert>
+<!--INSERT 区域-->
+<!--DELETE 区域-->
+    <delete id="deleteUserById"
+            parameterType="Integer">
+        DELETE FROM library.user WHERE uId=#{uId};
+    </delete>
+<!--DELETE 区域-->
+</mapper>
