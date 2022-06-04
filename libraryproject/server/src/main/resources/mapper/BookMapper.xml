@@ -6,22 +6,18 @@
     <resultMap id="bookResMap" type="Book">
         <id property="bId" column="bId"/>
         <result property="bName" column="bName"/>
-        <result property="bType" column="bType"/>
         <result property="bState" column="bState"/>
     </resultMap>
-    <!--通过id查找书-->
     <select id="findBookByBId"
             parameterType="Integer"
             resultType="Book">
         SELECT * FROM library.book WHERE bId = ${bId};
     </select>
-    <!--通过name查书-->
     <select id="findBookByBName"
             parameterType="String"
             resultType="Book">
         SELECT * FROM library.book WHERE bName = ${bName};
     </select>
-    <!--通过state查书-->
     <select id="findBookByBState"
             parameterType="Integer"
             resultType="Book">

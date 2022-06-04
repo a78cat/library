@@ -9,43 +9,48 @@
         <result property="uPwd" column="uPwd"/>
         <result property="uRole" column="uRole"/>
     </resultMap>
-<!--SELECT 区域-->
-    <!--通过id查找用户-->
+    <!--SELECT (ONE) 区域-->
+    <!--查找用户-->
     <select id="findUserByUId"
             parameterType="Integer"
             resultType="User"
             resultMap="userResMap">
         SELECT * FROM library.user WHERE uId = #{uId};
     </select>
-    <!--通过姓名查找用户-->
     <select id="findUserByUName"
             parameterType="String"
             resultType="User"
             resultMap="userResMap">
         SELECT * FROM library.user WHERE uName = #{uName};
     </select>
-    <!--通过身份查找用户-->
     <select id="findUserByURole"
             parameterType="Integer"
             resultType="User">
         SELECT * FROM library.user WHERE uRole = #{uRole};
     </select>
-    <!--通过用户名和密码查找用户-->
     <select id="findUserByUNameAndPassWord"
             resultMap="userResMap">
         SELECT * FROM library.user WHERE uName=#{uName} AND uPwd=#{uPwd};
     </select>
-<!--SELECT 区域-->
-<!--INSERT 区域-->
+
+    <!--SELECT (List) 区域-->
+    <!--查找所有用户-->
+    <select id="findAllUser"
+            resultMap="userResMap">
+        SELECT * FROM library.user;
+    </select>
+
+    <!--INSERT 区域-->
     <insert id="addUser"
             parameterType="User">
         INSERT INTO library.user(uName, uPwd, uRole) VALUES (#{uName}, #{uPwd}, #{uRole});
     </insert>
-<!--INSERT 区域-->
-<!--DELETE 区域-->
-    <delete id="deleteUserById"
-            parameterType="Integer">
-        DELETE FROM library.user WHERE uId=#{uId};
+
+    <!--DELETE 区域-->
+    <!--通过用户ID和用户名和密码删除用户-->
+    <delete id="deleteUserByUIdAndUNameAndPassWord"
+            parameterType="User">
+        DELETE FROM library.user WHERE uId=#{uId} AND uName=#{uName} AND uPwd=#{uPwd};
     </delete>
-<!--DELETE 区域-->
+
 </mapper>

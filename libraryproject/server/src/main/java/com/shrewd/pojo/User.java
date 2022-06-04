@@ -1,5 +1,7 @@
 package com.shrewd.pojo;
 
+import com.alibaba.fastjson.JSONObject;
+
 /***
  * 持久化User
  */
@@ -10,7 +12,10 @@ public class User {
     private String uPwd;    //用户密码
     private int uRole;      //用户身份
 
+    private JSONObject jsonObject;
+
     public User() {
+        jsonObject = new JSONObject();
     }
 
     public User(int uId, String uName, String uPwd, int uRole) {
@@ -20,40 +25,27 @@ public class User {
         this.uRole = uRole;
     }
 
-    public int getuId() {
-        return uId;
-    }
-
     public void setuId(int uId) {
         this.uId = uId;
-    }
-
-    public String getuName() {
-        return uName;
     }
 
     public void setuName(String uName) {
         this.uName = uName;
     }
 
-    public String getuPwd() {
-        return uPwd;
-    }
-
     public void setuPwd(String uPwd) {
         this.uPwd = uPwd;
-    }
-
-    public int getuRole() {
-        return uRole;
     }
 
     public void setuRole(int uRole) {
         this.uRole = uRole;
     }
 
-    @Override
-    public String toString() {
-        return "" + uId + ',' + uName + ',' + uRole;
+    public JSONObject getJsonObject() {
+        jsonObject.put("uId", uId);
+        jsonObject.put("uName", uName);
+        jsonObject.put("uRole", uRole);
+        return jsonObject;
     }
+
 }
