@@ -1,2 +1,2 @@
 # library
-MyBatis、web-service后端项目，期末大作业
+MyBatis、web-service、前后端分离，期末大作业
